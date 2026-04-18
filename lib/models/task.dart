@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-enum Category{
+enum Category {
   personal,
   work,
   meeting,
   study,
 }
 
-class Task{
+class Task {
+  final int? id;
   final String title;
   final Category category;
   final TimeOfDay time;
-  RxBool isDone = false.obs;
+  final RxBool isDone;
 
-  Task({required this.title, required this.category, required this.time});
+  Task({
+    this.id,
+    required this.title,
+    required this.category,
+    required this.time,
+    bool isDone = false,
+  }) : isDone = isDone.obs;
 }

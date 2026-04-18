@@ -5,7 +5,7 @@ const kBackgroundColor = Color(0xFFF9FEFF);
 
 const kSecondColor =Color(0xffF448B9);
 
-const kGradientBackground =  LinearGradient(
+const kGradientAppbar =  LinearGradient(
   colors: [
     Color(0xFF4576DB),
     Color(0xFF78B8EA),

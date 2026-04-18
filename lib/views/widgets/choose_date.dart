@@ -32,7 +32,8 @@ class ChooseDate extends StatelessWidget {
     final controller = Get.find<TasksController>();
     final TimeOfDay? picked = await showTimePicker(
         context: context,
-        initialTime: controller.selectedTime.value, builder: (BuildContext context, Widget? child) {
+        initialTime: controller.selectedTime.value,
+        builder: (BuildContext context, Widget? child) {
       return MediaQuery(
         data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
         child: child!,

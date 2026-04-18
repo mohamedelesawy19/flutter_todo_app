@@ -19,34 +19,33 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, height*0.29),
+        preferredSize: Size(double.infinity, height * 0.29),
         child: Container(
-          decoration:  const BoxDecoration(
-            gradient: kGradientBackground,
+          decoration: const BoxDecoration(
+            gradient: kGradientAppbar,
           ),
           child: SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                TopBar(),
-                TodayReminder()
-              ],
+              children: const [TopBar(), TodayReminder()],
             ),
           ),
         ),
       ),
-      body: Obx( () => controller.length() == 0
-          ?const NoTasksYet()
-          :ListView.builder(
-            itemCount: controller.length(),
-            itemBuilder: (ctx, idx){
-              return TaskView(index: idx,);
-            }
-          ),
-        ),
+      body: Obx(() {
+        return controller.tasks.isEmpty
+            ? const NoTasksYet()
+            : ListView.builder(
+                itemCount: controller.length(),
+                itemBuilder: (ctx, idx) {
+                  return TaskView(
+                    index: idx,
+                  );
+                });
+      }),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          _modalBottomSheet(context);
+        onPressed: () {
+          _modalBottomSheet(context, controller);
         },
         backgroundColor: kSecondColor,
         elevation: 10,
@@ -56,7 +55,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  void _modalBottomSheet(BuildContext context){
+  void _modalBottomSheet(BuildContext context, TasksController controller) {
+    controller.resetAddTaskForm();
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -70,5 +70,4 @@ class HomeScreen extends StatelessWidget {
       },
     );
   }
-
 }
